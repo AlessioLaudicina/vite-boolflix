@@ -1,34 +1,45 @@
 <script>
 import axios from 'axios';
-
+import { store } from './store.js';
 import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
 export default {
   name: 'App',
   data() {
     return {
-
+      store
     }
 
   },
-  components: {
-    AppHeader
+  methods: {
+    getMovies() {
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.ApiToken}&query=${this.store.search}`)
+        .then(response => {
+          console.log(response);
+          this.store.movies = response.data.results;
+        });
+
+
+    }
   },
-  created() {
+  components: {
+    AppHeader,
+    AppMain
+  },
 
-    axios.get('https://api.themoviedb.org/3/search/movie?api_key=7b2204b229e446d8aea432af312b142c&query=ritorno+al+futuro')
-      .then(response => {
-        console.log(response)
-      })
-
-  }
 }
 
 </script>
 
 <template>
   <header>
-    <AppHeader></AppHeader>
+    <AppHeader @doSearch="getMovies"></AppHeader>
   </header>
+
+  <main>
+    <AppMain></AppMain>
+
+  </main>
 </template>
 
 <style lang="scss">
