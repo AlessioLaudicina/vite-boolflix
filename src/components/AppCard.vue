@@ -1,6 +1,12 @@
 <script>
+import { store } from '../store.js';
 export default {
     name: 'AppCard',
+    data() {
+        return {
+            store
+        }
+    },
     props: {
         movie: Object
     }
@@ -13,7 +19,7 @@ export default {
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img src="" alt="Movie" style="width:300px;height:300px;">
+                    <img :src="store.imageUrl + movie.poster_path" alt="Movie" style="width:300px;height:300px;">
                 </div>
                 <div class="flip-card-back">
                     <h3> {{ movie.title }}</h3>
@@ -30,6 +36,11 @@ export default {
 
 
 <style scoped>
+li {
+    list-style: none;
+    margin: 5px;
+}
+
 .flip-card {
     background-color: transparent;
     width: 300px;
