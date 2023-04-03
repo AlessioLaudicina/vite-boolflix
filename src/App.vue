@@ -37,7 +37,11 @@ export default {
   </header>
 
   <main>
-    <AppMain></AppMain>
+    <div class="container">
+      <AppMain></AppMain>
+
+    </div>
+
 
   </main>
 </template>
@@ -45,4 +49,8 @@ export default {
 <style lang="scss">
 @use './styles/general.scss';
 @use './styles/partials/variables.scss' as *;
+
+body {
+  background-color: $secondary-color;
+}
 </style>
