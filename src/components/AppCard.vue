@@ -9,6 +9,10 @@ export default {
         }
     },
     methods: {
+        getImageUrl(path) {
+            return new URL(path, import.meta.url).href
+        }
+
 
 
     },
@@ -29,7 +33,8 @@ export default {
                 <div class="flip-card-back">
                     <h3> {{ movie.title }}</h3>
                     <p>{{ movie.original_title }}</p>
-                    <img src="" v-if="availableFlags.includes(movie.original_language)" alt="">
+                    <img :src="getImageUrl(`../assets/flags/${movie.original_language}.png`)" class="flags"
+                        v-if="availableFlags.includes(movie.original_language)" alt="">
                     <p v-else>{{ movie.original_language }} </p>
                     <p>{{ movie.vote_average }}</p>
 
@@ -88,5 +93,10 @@ li {
     color: white;
     transform: rotateY(180deg);
 
+}
+
+.flags {
+    width: 30px;
+    padding: 5px;
 }
 </style>
