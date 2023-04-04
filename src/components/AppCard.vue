@@ -11,7 +11,10 @@ export default {
     methods: {
         getImageUrl(path) {
             return new URL(path, import.meta.url).href
-        }
+        },
+        getRating() {
+            return this.movie.vote_average / 2;
+        },
 
 
 
@@ -31,12 +34,15 @@ export default {
                     <img :src="store.imageUrl + movie.poster_path" alt="Movie" style="width:300px;height:300px;">
                 </div>
                 <div class="flip-card-back">
-                    <h3> {{ movie.title }}</h3>
-                    <p>{{ movie.original_title }}</p>
+                    <h6> <span>Titolo: </span>{{ movie.title }}</h6>
+                    <p><span>Titolo originale: </span>{{ movie.original_title }}</p>
+                    <span>Paese: </span>
                     <img :src="getImageUrl(`../assets/flags/${movie.original_language}.png`)" class="flags"
-                        v-if="availableFlags.includes(movie.original_language)" alt="">
+                        v-if="availableFlags.includes(movie.original_language)" alt="Lingua">
                     <p v-else>{{ movie.original_language }} </p>
-                    <p>{{ movie.vote_average }}</p>
+                    <p> <span>Valutazione: </span>{{ movie.vote_average }}</p>
+                    <span>Trama: </span>
+                    <p style="text-align: justify;">{{ movie.overview }}</p>
 
                 </div>
             </div>
@@ -48,16 +54,12 @@ export default {
 
 
 <style scoped>
-li {
-    list-style: none;
-    margin: 5px;
-}
-
 .flip-card {
     background-color: transparent;
     width: 300px;
     height: 300px;
     perspective: 1000px;
+    overflow: scroll;
 }
 
 .flip-card-inner {
@@ -92,6 +94,26 @@ li {
     background-color: black;
     color: white;
     transform: rotateY(180deg);
+
+
+}
+
+li {
+    list-style: none;
+    margin: 5px;
+}
+
+h6 {
+    padding: 10px 0;
+}
+
+span {
+    font-weight: bolder;
+}
+
+p {
+    font-size: 0.7rem;
+    padding: 0 15px;
 
 }
 

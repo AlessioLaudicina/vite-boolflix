@@ -4,8 +4,15 @@ export default {
     name: 'AppCardTvShow',
     data() {
         return {
-            store
+            store,
+            availableFlags: ['en', 'it']
+
         }
+    },
+    methods: {
+        getImageUrl(path) {
+            return new URL(path, import.meta.url).href
+        },
     },
 
     props: {
@@ -23,10 +30,16 @@ export default {
                     <img :src="store.imageUrl + movie.poster_path" alt="TV Show" style="width:300px;height:300px;">
                 </div>
                 <div class="flip-card-back">
-                    <h3> {{ movie.name }}</h3>
-                    <p>{{ movie.original_name }}</p>
-                    <p>{{ movie.original_language }} </p>
-                    <p>{{ movie.vote_average }}</p>
+                    <h6> <span>Titolo: </span>{{ movie.name }}</h6>
+                    <p> <span>Titolo originale: </span>{{ movie.original_name }}</p>
+                    <span>Paese: </span>
+                    <img :src="getImageUrl(`../assets/flags/${movie.original_language}.png`)" class="flags"
+                        v-if="availableFlags.includes(movie.original_language)" alt="">
+                    <p v-else>{{ movie.original_language }} </p>
+                    <p> <span>Valutazione: </span>{{ movie.vote_average }}</p>
+                    <span>Trama: </span>
+                    <p style="text-align: justify;">{{ movie.overview }}</p>
+
 
                 </div>
             </div>
@@ -48,6 +61,7 @@ li {
     width: 300px;
     height: 300px;
     perspective: 1000px;
+    overflow: scroll;
 }
 
 .flip-card-inner {
@@ -83,5 +97,20 @@ li {
     color: white;
     transform: rotateY(180deg);
 
+}
+
+span {
+    font-weight: bolder;
+
+}
+
+p {
+    font-size: 0.7rem;
+    padding: 0 15px;
+}
+
+.flags {
+    width: 30px;
+    padding: 5px;
 }
 </style>
