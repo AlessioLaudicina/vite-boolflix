@@ -15,7 +15,7 @@ export default {
 
 <template>
     <div class="jt-container p-5">
-        <h1>BOOTFLIX</h1>
+        <h1>NETFLIX</h1>
         <div class="search-container mx-2">
             <div class="row">
 

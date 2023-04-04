@@ -1,17 +1,13 @@
 <script>
 import { store } from '../store.js';
 export default {
-    name: 'AppCard',
+    name: 'AppCardTvShow',
     data() {
         return {
-            store,
-            availableFlags: ['en', 'it']
+            store
         }
     },
-    methods: {
 
-
-    },
     props: {
         movie: Object
     }
@@ -24,13 +20,12 @@ export default {
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img :src="store.imageUrl + movie.poster_path" alt="Movie" style="width:300px;height:300px;">
+                    <img :src="store.imageUrl + movie.poster_path" alt="TV Show" style="width:300px;height:300px;">
                 </div>
                 <div class="flip-card-back">
-                    <h3> {{ movie.title }}</h3>
-                    <p>{{ movie.original_title }}</p>
-                    <img src="" v-if="availableFlags.includes(movie.original_language)" alt="">
-                    <p v-else>{{ movie.original_language }} </p>
+                    <h3> {{ movie.name }}</h3>
+                    <p>{{ movie.original_name }}</p>
+                    <p>{{ movie.original_language }} </p>
                     <p>{{ movie.vote_average }}</p>
 
                 </div>

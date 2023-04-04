@@ -12,13 +12,25 @@ export default {
 
   },
   methods: {
+
+    performSearch() {
+      this.getMovies();
+      this.getTvShow();
+
+    },
+
+
     getMovies() {
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.ApiToken}&query=${this.store.search}`)
         .then(response => {
-          console.log(response);
           this.store.movies = response.data.results;
         });
-
+    },
+    getTvShow() {
+      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.ApiToken}&query=${this.store.search}`)
+        .then(response => {
+          this.store.tvShow = response.data.results;
+        });
 
     }
   },
@@ -33,7 +45,7 @@ export default {
 
 <template>
   <header>
-    <AppHeader @doSearch="getMovies"></AppHeader>
+    <AppHeader @doSearch="performSearch"></AppHeader>
   </header>
 
   <main>
