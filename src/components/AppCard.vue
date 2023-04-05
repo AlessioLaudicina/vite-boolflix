@@ -13,7 +13,7 @@ export default {
             return new URL(path, import.meta.url).href
         },
         getRating() {
-            return this.movie.vote_average / 2;
+            return Math.ceil(this.movie.vote_average / 2);
         },
 
 
@@ -40,7 +40,13 @@ export default {
                     <img :src="getImageUrl(`../assets/flags/${movie.original_language}.png`)" class="flags"
                         v-if="availableFlags.includes(movie.original_language)" alt="Lingua">
                     <p v-else>{{ movie.original_language }} </p>
-                    <p> <span>Valutazione: </span>{{ movie.vote_average }}</p>
+
+                    <div style="padding: 5px;">
+                        <span>Valutazione: </span>
+
+                        <i v-for="i in 5" class=" fa-star" :key="i"
+                            :class="i <= getRating() ? 'fa-solid' : 'fa-regular'"></i>
+                    </div>
                     <span>Trama: </span>
                     <p style="text-align: justify;">{{ movie.overview }}</p>
 
