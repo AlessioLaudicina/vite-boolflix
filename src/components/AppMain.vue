@@ -1,7 +1,6 @@
 <script>
 import { store } from '../store.js';
 import AppCard from '../components/AppCard.vue';
-import AppCardTvShow from '../components/AppCardTvShow.vue';
 export default {
     name: 'AppMain',
     data() {
@@ -11,7 +10,7 @@ export default {
     },
     components: {
         AppCard,
-        AppCardTvShow
+
     }
 }
 
@@ -28,7 +27,7 @@ export default {
     <section>
         <h3 class="text-white pt-3">TV Shows</h3>
         <ul>
-            <AppCardTvShow v-for="(movie, index) in store.tvShow" :key="movie.id" :movie="movie"></AppCardTvShow>
+            <AppCard v-for="(serie, index) in store.tvShow" :key="index" :movie="serie"></AppCard>
 
 
         </ul>

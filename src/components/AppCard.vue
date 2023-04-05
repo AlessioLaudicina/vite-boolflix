@@ -12,6 +12,21 @@ export default {
         getImageUrl(path) {
             return new URL(path, import.meta.url).href
         },
+        getTitle() {
+            if (this.movie.title) {
+                return this.movie.title
+            } else {
+                return this.movie.name
+            }
+        },
+        getOriginalTitle() {
+            if (this.movie.original_title) {
+                return this.movie.original_title
+            } else {
+                return this.movie.original_name
+            }
+
+        },
         getRating() {
             return Math.ceil(this.movie.vote_average / 2);
         },
@@ -34,8 +49,8 @@ export default {
                     <img :src="store.imageUrl + movie.poster_path" alt="Movie" style="width:300px;height:300px;">
                 </div>
                 <div class="flip-card-back">
-                    <h6> <span>Titolo: </span>{{ movie.title }}</h6>
-                    <p><span>Titolo originale: </span>{{ movie.original_title }}</p>
+                    <h6> <span>Titolo: </span>{{ getTitle() }}</h6>
+                    <p><span>Titolo originale: </span>{{ getOriginalTitle() }}</p>
                     <span>Paese: </span>
                     <img :src="getImageUrl(`../assets/flags/${movie.original_language}.png`)" class="flags"
                         v-if="availableFlags.includes(movie.original_language)" alt="Lingua">

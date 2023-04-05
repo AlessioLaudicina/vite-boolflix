@@ -21,13 +21,13 @@ export default {
 
 
     getMovies() {
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.ApiToken}&query=${this.store.search}`)
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.ApiToken}&language=it-IT&query=${this.store.search}`)
         .then(response => {
           this.store.movies = response.data.results;
         });
     },
     getTvShow() {
-      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.ApiToken}&query=${this.store.search}`)
+      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.ApiToken}&language=it-IT&query=${this.store.search}`)
         .then(response => {
           this.store.tvShow = response.data.results;
         });
